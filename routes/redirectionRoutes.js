@@ -14,31 +14,27 @@ const Redirection = require("../models/Redirection");
  * Delete Redirection : not mandatory
  */
 
-//Create
+//Create : new shortenUrl
 
 router.post("/redirection/create", async (req, res) => {
   try {
-    console.log("creation of a redirection entry");
+    //console.log("creation of a redirection entry");
 
-    //TODO TEST D'EXISTENCE
-
-    //TODO GENERATION ALEATOIRE
+    // generate random key of 5 chars
     let randomString = randomstring.generate(5);
 
-    //TODO COUNTER DE VISITE
-
-    console.log(req.body);
-
+    //console.log(req.body);
+    //new entry in the bd
     const redirection = new Redirection({
-      toUrl: req.body.toUrl,
-      fromUrlKey: randomString,
-      visitsCounter: 0
+      toUrl: req.body.toUrl, // url sent
+      fromUrlKey: randomString, //unique key
+      visitsCounter: 0 // not visited yet
     });
 
     console.log(redirection);
-    await redirection.save(); // ASYNCHRONE
+    await redirection.save(); // will thought an error if random key already exist. 1 odd over 62^5
     return res.json({
-      _id: redirection._id,
+      //_id: redirection._id,
       toUrl: redirection.toUrl,
       fromUrlKey: redirection.fromUrlKey,
       visitsCounter: redirection.visitsCounter
@@ -50,7 +46,7 @@ router.post("/redirection/create", async (req, res) => {
   }
 });
 
-// Read
+// Read : all redirection
 
 router.get("/redirection", async (req, res) => {
   try {
@@ -63,7 +59,7 @@ router.get("/redirection", async (req, res) => {
   }
 });
 
-//Update visitsCounter
+//Update : confirm key exist in the database and update the counter of visits
 
 router.post("/redirection/update", async (req, res) => {
   try {
