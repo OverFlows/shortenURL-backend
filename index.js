@@ -3,8 +3,6 @@ const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const app = express();
 const cors = require("cors");
-/* const helmet = require("helmet");
-app.use(helmet()); */
 
 app.use(cors());
 app.use(bodyParser.json());

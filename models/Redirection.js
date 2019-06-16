@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 
 /*
  * Redirection contain :
- * - toUrl : the original url that is shorten.
+ * - toUrl : the original url that is shorten. the One we want to redirect "to"
  * - fromUrlKey : the 5 characters string randomly generated which allow
  * DOMAIN_NAME/:fromUrlKey (shorten url) to redirect to toUrl value.
  * - visitsCounter : the number of time the shorten url has been used
